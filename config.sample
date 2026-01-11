@@ -1,0 +1,14 @@
+# Voice Memo to Obsidian Configuration
+#
+# Copy this to ~/.config/voice-memo/config and fill in your values
+#
+
+# Required: Your Gemini API key
+# Get one at: https://makersuite.google.com/app/apikey
+GEMINI_API_KEY=""
+
+# Required: Path to your Obsidian vault
+OBSIDIAN_VAULT=""
+
+# Optional: Gemini model to use (default: gemini-2.5-flash)
+# GEMINI_MODEL="gemini-2.5-flash"
