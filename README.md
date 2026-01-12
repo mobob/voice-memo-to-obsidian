@@ -2,6 +2,10 @@
 
 Automatically transcribe iOS Voice Memos and create Obsidian notes with AI-generated summaries, tags, and extracted tasks.
 
+Lots of room to update and personalize this, but wanted to crystalize the first version i got up and running in case its useful for anyone.
+
+This version uses cron because I generally find it more reliable than Automator, and Gemini because its cheap and reasonably reliable.
+
 ## Features
 
 - **Automatic processing** - Polls for new voice memos every 2 minutes via cron
@@ -233,6 +237,8 @@ The watcher only looks for files modified in the last 10 minutes. For older file
 ```bash
 ~/.config/voice-memo/scripts/voice-memo-to-obsidian.sh "/path/to/file.m4a"
 ```
+
+Otherwise it can very likely be a iCloud sync glitch. More often than not one side or the other will get stuck. Successive reboots of your phone/Mac usually solve this, but the best solution is time.
 
 ## Uninstall
 

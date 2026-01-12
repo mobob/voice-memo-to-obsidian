@@ -209,9 +209,9 @@ else
 - title: a concise descriptive title (3-7 words)
 - summary: a 1-2 sentence summary of the main points
 - tags: an array of 2-4 relevant topic tags (single words, lowercase, no # symbol)
-- todos: an array of task objects extracted from the transcript. Each task object should have:
-  - task: the task description (clear, actionable)
-  - priority: one of \"asap\", \"today\", \"thisweek\", \"thismonth\", \"thisyear\" based on urgency mentioned or implied
+- todos: an array of fully formatted Obsidian task strings. Format each as:
+  \"- [ ] Task description #priority\"
+  Where priority is one of: asap, today, thisweek, thismonth, thisyear
 
 If no todos are found, return an empty array for todos.
 
@@ -219,7 +219,6 @@ Return ONLY valid JSON, no other text.
 
 Transcript:"
 fi
-
 ANALYSIS_PROMPT="${ANALYSIS_PROMPT_BASE}
 ${TRANSCRIPT}"
 
@@ -271,14 +270,14 @@ if ! echo "$TAGS_YAML" | grep -q "voicememos"; then
 $TAGS_YAML"
 fi
 
-# Format todos as Obsidian tasks with priority tags
+# Format todos - AI returns pre-formatted strings, just join with newlines
 TODOS_MD=""
 TODO_COUNT=$(echo "$TODOS" | /usr/bin/jq 'length')
 if [[ "$TODO_COUNT" -gt 0 ]]; then
     TODOS_MD="## Tasks
 
 "
-    TODOS_MD+=$(echo "$TODOS" | /usr/bin/jq -r '.[] | "- [ ] " + .task + " #" + .priority')
+    TODOS_MD+=$(echo "$TODOS" | /usr/bin/jq -r '.[]')
     TODOS_MD+="
 
 "
